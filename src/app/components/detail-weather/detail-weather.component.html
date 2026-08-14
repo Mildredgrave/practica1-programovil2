@@ -1,0 +1,35 @@
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>Consultar Clima</ion-card-title>
+  </ion-card-header>
+
+  <ion-card-content>
+    
+    <ion-item>
+      <ion-label position="stacked">País</ion-label>
+      <ion-select placeholder="Seleccione un país" [(ngModel)]="paisSeleccionado" (ionChange)="onPaisChange()">
+        <ion-select-option *ngFor="let p of paises" [value]="p">{{p.pais}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    
+    <div *ngIf="loading" class="loading" style="margin-top: 16px; text-align: center;">
+      <ion-spinner name="crescent"></ion-spinner>
+      <div>Cargando...</div>
+    </div>
+
+    
+    <div *ngIf="resultado" style="margin-top: 20px; border-top: 1px solid rgba(255, 255, 255, 0.12); padding-top: 16px;">
+      <h3 style="margin-bottom: 12px; font-weight: bold;">Resultado</h3>
+      
+      <p><strong>País:</strong> {{resultado.country}}</p>
+      <p><strong>Capital:</strong> {{resultado.capital}}</p>
+      <p><strong>Condición:</strong> {{resultado.condition}}</p>
+      <p><strong>Temperatura:</strong> {{resultado.temperature}} °C</p>
+      <p *ngIf="resultado.apparent_temperature"><strong>Sensación térmica:</strong> {{resultado.apparent_temperature}} °C</p>
+      <p *ngIf="resultado.humidity !== undefined"><strong>Humedad:</strong> {{resultado.humidity}} %</p>
+      <p *ngIf="resultado.windspeed !== undefined"><strong>Velocidad del viento:</strong> {{resultado.windspeed}} km/h</p>
+      <p><strong>Fecha y hora:</strong> {{resultado.time}}</p>
+    </div>
+  </ion-card-content>
+</ion-card>
